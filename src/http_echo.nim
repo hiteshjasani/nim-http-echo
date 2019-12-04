@@ -1,8 +1,17 @@
-import asynchttpserver, asyncdispatch, asyncnet, strformat
+import asynchttpserver, asyncdispatch, asyncnet, parseopt, strformat
 
 var
   server = newAsyncHttpServer()
   message = "Hello World"
+
+proc writeHelp() =
+  echo """
+http_echo [options]
+
+ -t:<message>, --text:<message>    - Set message text to echo
+ -h, --help                        - This help message
+"""
+  quit(QuitFailure)
 
 proc render(req: Request): string =
   result = &"""
@@ -34,4 +43,18 @@ proc cb(req: Request) {.async, gcsafe.} =
   await req.respond(Http200, msg, headers)
 
 when isMainModule:
+  var p = initOptParser()
+  for kind, key, val in p.getopt():
+    case kind
+    of cmdLongOption, cmdShortOption:
+      case key
+      of "text", "t":
+        echo "text was set to ", val
+        message = val
+      of "help", "h": writeHelp()
+    of cmdArgument:
+      assert(false)
+    of cmdEnd:
+      assert(false)
+
   waitFor server.serve(Port(8080), cb)
