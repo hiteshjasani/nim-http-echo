@@ -10,9 +10,11 @@ To run on a local docker instance
 # print help and exit
 docker run --rm -p8080:8080 hiteshjasani/http-echo:0.2 -h
 
+# Run server with default message
+docker run --rm -p8080:8080 hiteshjasani/http-echo:0.2
 
 # Run server with custom message
-docker run --rm -p8080:8080 hiteshjasani/http-echo:0.2 -t:"Hi there!"
+docker run --rm -p8080:8080 hiteshjasani/http-echo:0.2 -t:"Hi from echo 19!"
 ```
 
 Point your browser to http://localhost:8080/
