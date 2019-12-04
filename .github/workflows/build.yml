@@ -20,7 +20,7 @@ jobs:
       run: docker build -t $AUTHOR/$REPO:$IMAGE-$VERSION .
 
     - name: Test
-      run: docker run --rm $AUTHOR/$REPO:$IMAGE-$VERSION
+      run: docker run --rm $AUTHOR/$REPO:$IMAGE-$VERSION -h
 
     - name: List docker images
       run: docker images

@@ -11,4 +11,4 @@ RUN nimble build -y \
 
 WORKDIR /bin/project
 ENTRYPOINT ["/bin/project/http_echo"]
-CMD ["-h"]
+CMD ["-t:hello"]

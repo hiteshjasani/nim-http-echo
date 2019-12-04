@@ -2,16 +2,16 @@ import asynchttpserver, asyncdispatch, asyncnet, parseopt, strformat
 
 var
   server = newAsyncHttpServer()
-  message = "Hello World"
+  message = "no message set"
 
-proc writeHelp() =
+proc writeHelp(errorcode: int = QuitFailure) =
   echo """
 http_echo [options]
 
  -t:<message>, --text:<message>    - Set message text to echo
  -h, --help                        - This help message
 """
-  quit(QuitFailure)
+  quit(errorcode)
 
 proc render(req: Request): string =
   result = &"""
@@ -51,10 +51,9 @@ when isMainModule:
       of "text", "t":
         echo "text was set to ", val
         message = val
-      of "help", "h": writeHelp()
+      of "help", "h": writeHelp(QuitSuccess)
     of cmdArgument:
-      assert(false)
+      writeHelp(QuitFailure)
     of cmdEnd:
-      assert(false)
-
+      writeHelp(QuitFailure)
   waitFor server.serve(Port(8080), cb)
