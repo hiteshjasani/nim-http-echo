@@ -2,6 +2,9 @@
 
 ![](https://github.com/hiteshjasani/nim-http-echo/workflows/Build%20DockerHub%20Image/badge.svg)
 
+A simple http echo server that can be deployed to docker instances or
+kubernetes clusters to test environments.
+
 ## Running
 
 To run on a local docker instance
