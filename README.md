@@ -16,3 +16,7 @@ docker run --rm -p8080:8080 hiteshjasani/http-echo:http-echo-0.1 -t:"Hi there!"
 ```
 
 Point your browser to http://localhost:8080/
+
+## Resources
+
+* https://hub.docker.com/repository/docker/hiteshjasani/http-echo
